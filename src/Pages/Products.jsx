@@ -1,6 +1,5 @@
 import React, { memo, useEffect, useState } from "react";
 import "../styles/Products.scss";
-import { useWhyDidYouUpdate } from "use-why-did-you-update";
 import Pagination from "../Components/Pagination";
 const PRODUCT_LIMIT = 10;
 
