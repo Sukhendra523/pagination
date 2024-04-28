@@ -1,0 +1,17 @@
+.pagination-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+
+    .page-list {
+        display: flex;
+        gap: 0.2rem;
+
+    }
+
+    button {
+        height: 40px;
+        padding: 0.6rem;
+    }
+}

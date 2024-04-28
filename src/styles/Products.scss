@@ -1,0 +1,32 @@
+.products-container{
+    margin: 20px;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    .product__card{
+        height: 250px;
+        list-style: none;
+        padding: 20px;
+        background-color: rgb(220, 220, 220);
+        text-align: center;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 29%;
+      
+        &__header{
+
+            &-title{
+                height: 1rem;
+    text-align: center;
+            }
+            &-img{
+                width: 50%;
+                height: 50%;
+                object-fit: cover;
+                margin-bottom: 3px;
+                aspect-ratio: 2;
+            }
+        }
+    }
+}
