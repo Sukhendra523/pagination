@@ -7,6 +7,9 @@
     .page-list {
         display: flex;
         gap: 0.2rem;
+        .pagination__selected{
+            background-color: #27bb16;
+        }
 
     }
 

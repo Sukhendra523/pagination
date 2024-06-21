@@ -1,30 +1,29 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import "../styles/Products.scss";
 import Pagination from "../Components/Pagination";
 const PRODUCT_LIMIT = 10;
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const [offset, setOffset] = useState(0);
-  const [lastPage, setLastPage] = useState();
-  const [pages, setPages] = useState([1,2,3]);
-
+  const [page, setPage] = useState(1);
+  const totalPages = useRef(null);
 
   const fetchProducts = async () => {
     const response = await fetch(
-      `https://dummyjson.com/products?limit=${PRODUCT_LIMIT}&skip=${offset}`
+      `https://dummyjson.com/products?limit=${PRODUCT_LIMIT}&skip=${(page-1)*PRODUCT_LIMIT}`
     );
     const responseData = await response?.json();
     if (responseData?.products) {
       // response = await response?.json()
       setProducts(responseData.products);
-      !lastPage && setLastPage((responseData.total/PRODUCT_LIMIT)-1);
+      ;
+      totalPages.current = Math.ceil(responseData.total / PRODUCT_LIMIT);
     }
   };
 
   useEffect(() => {
     fetchProducts();
-  }, [offset]);
+  }, [page]);
 
 
 
@@ -47,7 +46,7 @@ const Products = () => {
         </div>
       ))}
     </div>
-    <Pagination {...{pages,setOffset,setPages,lastPage}}/>
+    <Pagination {...{page,setPage,totalPages:totalPages.current}}/>
     </>
 
   );
