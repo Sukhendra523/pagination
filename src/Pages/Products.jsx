@@ -5,10 +5,9 @@ const PRODUCT_LIMIT = 10;
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const [page, setPage] = useState(1);
   const totalPages = useRef(null);
 
-  const fetchProducts = async () => {
+  const fetchProducts = async (page) => {
     const response = await fetch(
       `https://dummyjson.com/products?limit=${PRODUCT_LIMIT}&skip=${(page-1)*PRODUCT_LIMIT}`
     );
@@ -20,10 +19,6 @@ const Products = () => {
       totalPages.current = Math.ceil(responseData.total / PRODUCT_LIMIT);
     }
   };
-
-  useEffect(() => {
-    fetchProducts();
-  }, [page]);
 
 
 
@@ -46,7 +41,7 @@ const Products = () => {
         </div>
       ))}
     </div>
-    <Pagination {...{page,setPage,totalPages:totalPages.current}}/>
+    <Pagination fetchData={fetchProducts} totalPages={totalPages.current}/>
     </>
 
   );

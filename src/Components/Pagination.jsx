@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import '../styles/Pagination.scss';
 
-const Pagination = ({ page, setPage, totalPages, maxVisiblePage = 5 }) => {
+const Pagination = ({fetchData, totalPages, maxVisiblePage = 5 }) => {
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    fetchData(page);
+  }, [page]);
 
   const renderPageKey = (currPage, key) => {
+    const onClickHandler = () => {
+      if(!['start-page','end-page'].includes(key))  setPage(currPage)
+      }
     return (
       <button
         key={key}
         className={page === currPage ? "pagination__selected" : ""}
-        onClick={() => setPage(currPage)}
+        onClick={onClickHandler}
       >
         {currPage}
       </button>
